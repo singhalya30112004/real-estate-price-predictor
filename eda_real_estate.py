@@ -95,3 +95,25 @@ plt.show()
 # plt.tight_layout()
 # plt.show()
 
+
+# Correlation Heatmap for Numerical Features
+import numpy as np
+
+# Select only numeric columns
+corr_df = df[['BHK', 'bathroom', 'balcony', 'total_sqft', 'parking', 'price']].copy()
+
+# Ensure all columns are numeric
+corr_df = corr_df.apply(pd.to_numeric, errors='coerce')
+
+# Drop rows with any missing values
+corr_df.dropna(inplace=True)
+
+# Compute correlation matrix
+corr_matrix = corr_df.corr()
+
+# Plot the heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title("Correlation Heatmap (Numerical Features)")
+plt.tight_layout()
+plt.show()
