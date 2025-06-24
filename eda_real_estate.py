@@ -44,11 +44,9 @@ plt.show()
 
 
 # Scatterplot: Area vs Price
-
 # Filtering to remove extreme outliers
 scatter_df = df[(df['total_sqft'] < 5000) & (df['price'] < 5e7)]  # price < ₹5 Cr
 scatter_df['price_cr'] = scatter_df['price'] / 1e7
-
 plt.figure(figsize=(10, 6))
 sns.scatterplot(x='total_sqft', y='price_cr', data=scatter_df, alpha=0.4)
 plt.title("Total Sqft vs Price")
@@ -59,13 +57,23 @@ plt.show()
 
 
 # City-wise Avg Price per Sqft
-
 city_avg = df.groupby('city')['price_per_sqft'].mean().sort_values(ascending=False)
-
 plt.figure(figsize=(8, 5))
 sns.barplot(x=city_avg.index.str.title(), y=city_avg.values, palette="Set2")
 plt.title("Average Price per Sqft by City")
 plt.xlabel("City")
 plt.ylabel("Avg Price per Sqft (₹)")
+plt.tight_layout()
+plt.show()
+
+
+# BHK vs Price Boxplot
+scatter_df = df[(df['total_sqft'] < 5000) & (df['price'] < 5e7)]  # price < ₹5 Cr
+plt.figure(figsize=(10, 5))
+sns.boxplot(x='BHK', y='price', data=scatter_df)
+plt.ylim(0, 5e7)  # ₹5 Cr, adjust based on your data
+plt.title("BHK vs Price")
+plt.xlabel("Number of Bedrooms (BHK)")
+plt.ylabel("Price (₹ Crores)")
 plt.tight_layout()
 plt.show()
