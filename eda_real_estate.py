@@ -30,3 +30,14 @@ plt.xlabel("Price (in Lakhs)")
 plt.ylabel("Count")
 plt.tight_layout()
 plt.show()
+
+
+# Price Per Sqft Distribution
+plt.figure(figsize=(10, 5))
+sns.histplot(df['price_per_sqft'], bins=100, kde=True)
+plt.xlim(0, 20000)  # Focus on most realistic values (₹0–₹20k/sqft)
+plt.title("Price per Sqft Distribution (Zoomed In)")
+plt.xlabel("Price per Sqft (₹)")
+plt.ylabel("Count")
+plt.tight_layout()
+plt.show()
