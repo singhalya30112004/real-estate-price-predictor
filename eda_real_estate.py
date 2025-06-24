@@ -23,7 +23,7 @@ df['price_per_sqft'] = (df['price']) / df['total_sqft']
 
 # Plot price distribution
 plt.figure(figsize=(10, 5))
-sns.histplot(df['price'] / 100000, bins=100, kde=True)
+sns.histplot(df['price'] / 1e5, bins=100, kde=True)
 plt.xlim(0, 500)  # Limit to 0–500 lakhs (₹0–₹5Cr)
 plt.title("Price Distribution (Zoomed In)")
 plt.xlabel("Price (in Lakhs)")
@@ -47,12 +47,25 @@ plt.show()
 
 # Filtering to remove extreme outliers
 scatter_df = df[(df['total_sqft'] < 5000) & (df['price'] < 5e7)]  # price < ₹5 Cr
-scatter_df['price_cr'] = scatter_df['price'] / 10000000
+scatter_df['price_cr'] = scatter_df['price'] / 1e7
 
 plt.figure(figsize=(10, 6))
 sns.scatterplot(x='total_sqft', y='price_cr', data=scatter_df, alpha=0.4)
 plt.title("Total Sqft vs Price")
 plt.xlabel("Total Sqft")
 plt.ylabel("Price (₹ Crores)")
+plt.tight_layout()
+plt.show()
+
+
+# City-wise Avg Price per Sqft
+
+city_avg = df.groupby('city')['price_per_sqft'].mean().sort_values(ascending=False)
+
+plt.figure(figsize=(8, 5))
+sns.barplot(x=city_avg.index.str.title(), y=city_avg.values, palette="Set2")
+plt.title("Average Price per Sqft by City")
+plt.xlabel("City")
+plt.ylabel("Avg Price per Sqft (₹)")
 plt.tight_layout()
 plt.show()
