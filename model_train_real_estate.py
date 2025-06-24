@@ -33,3 +33,29 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 print("Training set shape:", X_train.shape)
 print("Test set shape:", X_test.shape)
+
+
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
+
+# Create pipeline: preprocessing + model
+model_pipeline = Pipeline(steps=[
+    ('preprocessing', preprocessor),
+    ('model', LinearRegression())
+])
+
+# Train the model
+model_pipeline.fit(X_train, y_train)
+
+# Predict on test set
+y_pred = model_pipeline.predict(X_test)
+
+# Evaluate performance
+r2 = r2_score(y_test, y_pred)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+
+print(f"\nModel Performance:")
+print(f"R² Score: {r2:.3f}")
+print(f"RMSE: ₹{rmse:,.0f}")
