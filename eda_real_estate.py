@@ -7,6 +7,9 @@ import seaborn as sns
 # Load the cleaned dataset
 df = pd.read_csv("cleaned_india_real_estate.csv")
 
+# Drop non-useful column
+df.drop(columns=['furnishing'], inplace=True)
+
 print(df['price'].head(10))
 
 print("Basic Info:")
@@ -18,10 +21,11 @@ print(df.describe())
 print("\nCities in dataset:")
 print(df['city'].value_counts())
 
-# Create price per sqft column
+# Create Price Per sqft Column
 df['price_per_sqft'] = (df['price']) / df['total_sqft']
 
-# Plot price distribution
+
+# Plot Price Distribution
 plt.figure(figsize=(10, 5))
 sns.histplot(df['price'] / 1e5, bins=100, kde=True)
 plt.xlim(0, 500)  # Limit to 0–500 lakhs (₹0–₹5Cr)
@@ -77,3 +81,17 @@ plt.xlabel("Number of Bedrooms (BHK)")
 plt.ylabel("Price (₹ Crores)")
 plt.tight_layout()
 plt.show()
+
+
+# Furnishing Type vs Price Boxplot
+# Result: No significant impact on price, so dropped from features
+# scatter_df = df[(df['total_sqft'] < 5000) & (df['price'] < 5e7)]  # price < ₹5 Cr
+# plt.figure(figsize=(10, 5))
+# sns.boxplot(x='furnishing', y='price', data=scatter_df)
+# plt.ylim(0, 5e7)
+# plt.title("Furnishing Type vs Price")
+# plt.xlabel("Furnishing Type")
+# plt.ylabel("Price (₹ Crores)")
+# plt.tight_layout()
+# plt.show()
+
