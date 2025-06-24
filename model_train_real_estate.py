@@ -6,7 +6,7 @@ from sklearn.compose import ColumnTransformer
 # Load cleaned dataset
 df = pd.read_csv("cleaned_india_real_estate.csv")
 
-# Calculate price per sqft (important feature!)
+# Calculate price per sqft
 df['price_per_sqft'] = df['price'] / df['total_sqft']
 
 # Define features & target

@@ -1,2 +1,1 @@
-#!/opt/anaconda3/bin/python
-
+n
