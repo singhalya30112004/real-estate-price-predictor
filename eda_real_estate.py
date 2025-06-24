@@ -1,5 +1,3 @@
-#!/opt/anaconda3/bin/python
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -85,15 +83,17 @@ plt.show()
 
 # Furnishing Type vs Price Boxplot
 # Result: No significant impact on price, so dropped from features
-# scatter_df = df[(df['total_sqft'] < 5000) & (df['price'] < 5e7)]  # price < ₹5 Cr
-# plt.figure(figsize=(10, 5))
-# sns.boxplot(x='furnishing', y='price', data=scatter_df)
-# plt.ylim(0, 5e7)
-# plt.title("Furnishing Type vs Price")
-# plt.xlabel("Furnishing Type")
-# plt.ylabel("Price (₹ Crores)")
-# plt.tight_layout()
-# plt.show()
+'''
+scatter_df = df[(df['total_sqft'] < 5000) & (df['price'] < 5e7)]  # price < ₹5 Cr
+plt.figure(figsize=(10, 5))
+sns.boxplot(x='furnishing', y='price', data=scatter_df)
+plt.ylim(0, 5e7)
+plt.title("Furnishing Type vs Price")
+plt.xlabel("Furnishing Type")
+plt.ylabel("Price (₹ Crores)")
+plt.tight_layout()
+plt.show()
+'''
 
 
 # Correlation Heatmap for Numerical Features
