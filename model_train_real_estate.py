@@ -82,3 +82,11 @@ rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 print(f"\nModel Performance:")
 print(f"R² Score: {r2:.3f}")
 print(f"RMSE: ₹{rmse:,.0f}")
+
+
+import joblib
+
+# Save the trained model pipeline
+joblib.dump(model_pipeline, "real_estate_price_model.pkl")
+
+print("\nModel saved as 'real_estate_price_model.pkl'")
