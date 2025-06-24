@@ -22,15 +22,19 @@ for col in ['BHK', 'bathroom', 'balcony', 'parking']:
 # 3. total_sqft: handle ranges like '1000-1200'
 def convert_sqft(x):
     try:
-        if isinstance(x, str) and '-' in x:
-            low, high = x.split('-')
-            return (float(low) + float(high)) / 2
-        return float(x)
+        if isinstance(x, str):
+            if '-' in x:
+                parts = x.split('-')
+                return (float(parts[0]) + float(parts[1])) / 2
+            else:
+                return float(x)
+        return x
     except:
-        return np.nan
+        return None
 
 df['total_sqft'] = df['total_sqft'].apply(convert_sqft)
 df['total_sqft'] = df['total_sqft'].fillna(df['total_sqft'].median())
+df = df.dropna(subset=['total_sqft'])
 
 # 4. price: convert to float
 df['price'] = pd.to_numeric(df['price'], errors='coerce')
