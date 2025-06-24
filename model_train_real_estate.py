@@ -86,7 +86,5 @@ print(f"RMSE: ₹{rmse:,.0f}")
 
 import joblib
 
-# Save the trained model pipeline
+# Save model and preprocessor
 joblib.dump(model_pipeline, "real_estate_price_model.pkl")
-
-print("\nModel saved as 'real_estate_price_model.pkl'")
