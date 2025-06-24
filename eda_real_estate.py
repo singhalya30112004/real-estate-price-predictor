@@ -117,3 +117,20 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f')
 plt.title("Correlation Heatmap (Numerical Features)")
 plt.tight_layout()
 plt.show()
+
+# Top Localities by Price per Sqft
+# Group by location and city to get avg price per sqft
+location_city_stats = df.groupby(['location', 'city'])['price_per_sqft'].mean().reset_index()
+
+# Sort and get top 10 expensive locations overall
+top10 = location_city_stats.sort_values(by='price_per_sqft', ascending=False).head(10)
+
+# Plotting
+plt.figure(figsize=(10, 6))
+sns.barplot(x='price_per_sqft', y='location', hue='city', data=top10, dodge=False, palette='Set2')
+plt.title("Top 10 Most Expensive Locations (₹ per sqft) - Colored by City")
+plt.xlabel("Price per Sqft (₹)")
+plt.ylabel("Location")
+plt.legend(title='City')
+plt.tight_layout()
+plt.show()
