@@ -41,3 +41,18 @@ plt.xlabel("Price per Sqft (₹)")
 plt.ylabel("Count")
 plt.tight_layout()
 plt.show()
+
+
+# Scatterplot: Area vs Price
+
+# Filtering to remove extreme outliers
+scatter_df = df[(df['total_sqft'] < 5000) & (df['price'] < 5e7)]  # price < ₹5 Cr
+scatter_df['price_cr'] = scatter_df['price'] / 10000000
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x='total_sqft', y='price_cr', data=scatter_df, alpha=0.4)
+plt.title("Total Sqft vs Price")
+plt.xlabel("Total Sqft")
+plt.ylabel("Price (₹ Crores)")
+plt.tight_layout()
+plt.show()
